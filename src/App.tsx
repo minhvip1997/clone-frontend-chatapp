@@ -7,10 +7,14 @@ import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
 import { getAuthUser } from './utils/api';
 import { User } from './utils/types';
+import { AuthContext } from './utils/context/AuthContext';
 
 function App() {
+
+  const [user, setUser] = useState<User>();
   return (
     <>
+    <AuthContext.Provider value={{ user, updateAuthUser: setUser }}>
       <Routes>
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
@@ -25,6 +29,7 @@ function App() {
           <Route path=":id" element={<ConversationChannelPage />} />
         </Route>
       </Routes>
+      </AuthContext.Provider>
     </>
   );
 }
