@@ -27,9 +27,10 @@ export const ConversationSidebar: FC<Props> = ({ conversations }) => {
         {conversations.map((conversation) => (
           <ConversationSidebarItem
             onClick={() => navigate(`/conversations/${conversation.id}`)}
+            key={conversation.id}
           >
             <div className={styles.conversationAvatar}></div>
-            <div>
+            <div key={conversation.id}>
               <span className={styles.conversationName}>
                 {conversation.name}
               </span>
