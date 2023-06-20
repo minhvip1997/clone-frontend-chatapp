@@ -13,11 +13,12 @@ function App() {
 
   const [user, setUser] = useState<User>();
   return (
-    <>
     <AuthContext.Provider value={{ user, updateAuthUser: setUser }}>
       <Routes>
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage />} >
+          <Route path=":id" element={<ConversationChannelPage />} />
+        </Route>
         <Route
           path="conversations"
           element={
@@ -30,7 +31,6 @@ function App() {
         </Route>
       </Routes>
       </AuthContext.Provider>
-    </>
   );
 }
 
