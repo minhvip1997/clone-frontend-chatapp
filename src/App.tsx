@@ -8,12 +8,14 @@ import { RegisterPage } from './pages/RegisterPage';
 import { getAuthUser } from './utils/api';
 import { User } from './utils/types';
 import { AuthContext } from './utils/context/AuthContext';
+import { socket, SocketContext } from './utils/context/SocketContext';
 
 function App() {
 
   const [user, setUser] = useState<User>();
   return (
     <AuthContext.Provider value={{ user, updateAuthUser: setUser }}>
+      <SocketContext.Provider value={socket}>
       <Routes>
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} >
@@ -30,6 +32,7 @@ function App() {
           <Route path=":id" element={<ConversationChannelPage />} />
         </Route>
       </Routes>
+      </SocketContext.Provider>
       </AuthContext.Provider>
   );
 }

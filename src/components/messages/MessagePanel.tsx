@@ -11,12 +11,14 @@ type Props = {
 
 export const MessagePanel: FC<Props> = ({ messages }) => {
   return (
+    <>
+    <MessagePanelHeader />
     <MessagePanelStyle>
-      <MessagePanelHeader />
       <MessagePanelBody>
         <MessageContainer messages={messages} />
         <MessageInputField />
       </MessagePanelBody>
     </MessagePanelStyle>
+    </>
   );
 };
