@@ -186,6 +186,7 @@ export const MessagePanelBody = styled.div`
   flex-direction: column;
   padding: 32px;
   box-sizing: border-box;
+  padding-top: 0
 `;
 
 export const MessageContainerStyle = styled.div`
