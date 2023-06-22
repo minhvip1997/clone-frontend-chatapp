@@ -6,6 +6,9 @@ import { MessageType, MessageEventPayload } from '../utils/types';
 import { getConversationMessages } from '../utils/api';
 import { MessagePanel } from '../components/messages/MessagePanel';
 import { SocketContext } from '../utils/context/SocketContext';
+import { AppDispatch, RootState } from '../store';
+import { fetchMessagesThunk } from '../store/conversationSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 export const ConversationChannelPage = () => {
@@ -13,14 +16,19 @@ export const ConversationChannelPage = () => {
   const [messages, setMessages] = useState<MessageType[]>([]);
   const { id } = useParams();
   const socket = useContext(SocketContext);
+  const conversations = useSelector(
+    (state: RootState) => state.conversation.conversations
+  );
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     const conversationId = parseInt(id!);
-    getConversationMessages(conversationId)
-      .then(({ data }) => {
-        setMessages(data);
-      })
-      .catch((err) => console.log(err));
+    dispatch(fetchMessagesThunk(conversationId));
+    // getConversationMessages(conversationId)
+    //   .then(({ data }) => {
+    //     setMessages(data);
+    //   })
+    //   .catch((err) => console.log(err));
   }, [id]);
   useEffect(() => {
     socket.on('connected', () => console.log('Connected'));

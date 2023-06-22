@@ -5,24 +5,25 @@ import { ConversationSidebar } from '../components/conversations/ConversationSid
 import { getConversations } from '../utils/api';
 import { Page } from '../utils/styles';
 import { ConversationType } from '../utils/types';
-import { AppDispatch } from '../store';
-import { useDispatch } from 'react-redux';
+import { AppDispatch, RootState } from '../store';
+import { useDispatch, useSelector  } from 'react-redux';
 import { fetchConversationsThunk } from '../store/conversationSlice';
+
 
 export const ConversationPage = () => {
   const { id } = useParams();
   const [conversations, setConversations] = useState<ConversationType[]>([]);
   const dispatch = useDispatch<AppDispatch>();
+  
 
   useEffect(() => {
-    // getConversations()
-    //   .then(({ data }) => {
-    //     setConversations(data);
-    //     console.log(data);
-    //   })
-    //   .catch((err) => console.log(err));
+    console.log(conversationsState.find((c) => c.id === 15));
     dispatch(fetchConversationsThunk());
   }, []);
+
+  const conversationsState = useSelector(
+    (state: RootState) => state.conversation.conversations
+  );
   // console.log(id);
 
   return (
