@@ -58,7 +58,7 @@ export const MessageContainer: FC<Props> = ({ messages }) => {
   // const { messages } = messages;
   const { id } = useParams();
   const conversationMessages = useSelector(
-    (state: RootState) => state.conversation.messages
+    (state: RootState) => state.messages.messages
   );
 
   useEffect(() => {

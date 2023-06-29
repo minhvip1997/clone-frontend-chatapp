@@ -7,7 +7,7 @@ import { getConversationMessages } from '../utils/api';
 import { MessagePanel } from '../components/messages/MessagePanel';
 import { SocketContext } from '../utils/context/SocketContext';
 import { AppDispatch, RootState } from '../store';
-import { fetchMessagesThunk } from '../store/conversationSlice';
+import { fetchMessagesThunk } from '../store/messageSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 
@@ -24,11 +24,6 @@ export const ConversationChannelPage = () => {
   useEffect(() => {
     const conversationId = parseInt(id!);
     dispatch(fetchMessagesThunk(conversationId));
-    // getConversationMessages(conversationId)
-    //   .then(({ data }) => {
-    //     setMessages(data);
-    //   })
-    //   .catch((err) => console.log(err));
   }, [id]);
   useEffect(() => {
     socket.on('connected', () => console.log('Connected'));
@@ -43,7 +38,6 @@ export const ConversationChannelPage = () => {
     };
   }, []);
   return (
-    // <ConversationChannelPageStyle>Channel Page</ConversationChannelPageStyle>
     <ConversationChannelPageStyle>
       <MessagePanel messages={messages}></MessagePanel>
     </ConversationChannelPageStyle>
